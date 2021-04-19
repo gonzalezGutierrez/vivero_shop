@@ -28,4 +28,14 @@ class Category extends Model
     {
         return $this->where('slug',$slug)->firstOrFail();
     }
+
+    public function url()
+    {
+        $this->id ? 'admin/categories/'.$this->slug : 'admin/categories';
+    }
+
+    public function method()
+    {
+        return $this->id ? 'PUT' : 'POST';
+    }
 }
