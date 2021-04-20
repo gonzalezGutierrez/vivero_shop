@@ -1,0 +1,38 @@
+/* Add here all your CSS customizations */
+
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+table thead tr th {
+    text-align: center;
+}
+table tbody tr {
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #56B478 !important;
+    border:none !important;
+}
+
+.divider-top-md {
+    margin-top:20px;
+}
+
+.image-border {
+    border:2px solid #dedede;
+    padding: 5px 2px;
+    cursor: pointer;
+}
+
+.label-success {
+    background-color: #56B478 !important;
+}
+
+.form-inline-block {
+    display: inline-block;
+}
