@@ -1,0 +1,60 @@
+{!! Form::open(['url'=>$category->url(),'method'=>$category->method(),'class'=>'form-horizontal form-bordered']) !!}
+
+    <div class="form-group">
+        <label class="col-md-3 control-label">Estatus</label>
+        <div class="col-md-6">
+            {!! Form::select('is_active',[0=>'Inactivo',1=>'Activo'],$category->is_active,['class'=>'form-control','placeholder'=>'Selecciona un estatus']) !!}
+            @error('is_active')
+                <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-3 control-label">Nombre de la categoría</label>
+        <div class="col-md-6">
+            {!! Form::text('name',$category->name,['class'=>'form-control']) !!}
+            @error('name')
+                <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-3 control-label">SLUG</label>
+        <div class="col-md-6">
+            {!! Form::text('slug',$category->slug,['class'=>'form-control']) !!}
+            @error('slug')
+                <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-3 control-label">URL Imagen</label>
+        <div class="col-md-6 d-flex">
+            {!! Form::text('image_url',$category->image_url,['class'=>'form-control']) !!}
+            @error('image_url')
+                <span class="text-danger">{{$message}}</span>
+            @enderror
+        </div>
+
+        <div class="col-md-12 divider-top-md text-center">
+            <img src="{{$category->image_url}}" class="image-border" alt="">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-3 control-label">Descripción</label>
+        <div class="col-md-6">
+            {!! Form::textarea('description',$category->description,['class'=>'form-control']) !!}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-12 text-center">
+            <button class="btn btn-primary btn-sm"><i class="fa fa-check-circle"></i> Guardar</button>
+        </div>
+    </div>
+
+{!! Form::close() !!}

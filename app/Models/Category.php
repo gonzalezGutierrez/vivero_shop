@@ -31,7 +31,7 @@ class Category extends Model
 
     public function url()
     {
-        $this->id ? 'admin/categories/'.$this->slug : 'admin/categories';
+        return $this->id ? 'admin/categories/'.$this->slug : 'admin/categories';
     }
 
     public function method()
