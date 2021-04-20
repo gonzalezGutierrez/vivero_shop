@@ -45,3 +45,14 @@
         </div>
     </div>
 @stop
+
+@section('js')
+
+    <script>
+
+        let slugify = new Slugify();
+
+
+    </script>
+
+@stop
