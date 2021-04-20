@@ -13,7 +13,7 @@
     <div class="form-group">
         <label class="col-md-3 control-label">Nombre de la categoría</label>
         <div class="col-md-6">
-            {!! Form::text('name',$category->name,['class'=>'form-control']) !!}
+            {!! Form::text('name',$category->name,['class'=>'form-control','id'=>'name']) !!}
             @error('name')
                 <span class="text-danger">{{$message}}</span>
             @enderror
@@ -23,7 +23,7 @@
     <div class="form-group">
         <label class="col-md-3 control-label">SLUG</label>
         <div class="col-md-6">
-            {!! Form::text('slug',$category->slug,['class'=>'form-control']) !!}
+            {!! Form::text('slug',$category->slug,['class'=>'form-control','id'=>'slug']) !!}
             @error('slug')
                 <span class="text-danger">{{$message}}</span>
             @enderror

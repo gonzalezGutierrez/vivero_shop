@@ -258,5 +258,8 @@
 <script src="{{asset('admin/assets/javascripts/tables/examples.datatables.default.js')}}"></script>
 <script src="{{asset('admin/assets/javascripts/tables/examples.datatables.row.with.details.js')}}"></script>
 <script src="{{asset('admin/assets/javascripts/tables/examples.datatables.tabletools.js')}}"></script>
+
+@yield('js')
+
 </body>
 </html>
