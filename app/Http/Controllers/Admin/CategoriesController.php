@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Categories\CategoryStoreRequest;
 use App\Repositories\Admin\Categories\CategoryRepository;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,7 @@ class CategoriesController extends Controller
         return view('Admin.categories.create',compact('category'));
     }
 
-    public function store(Request $request)
+    public function store(CategoryStoreRequest $request)
     {
         try {
 
@@ -54,7 +55,7 @@ class CategoriesController extends Controller
         return view('Admin.categories.edit',compact('category'));
     }
 
-    public function update(Request $request, $slug)
+    public function update(CategoryStoreRequest $request, $slug)
     {
         try {
 

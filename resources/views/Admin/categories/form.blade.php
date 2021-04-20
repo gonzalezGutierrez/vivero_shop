@@ -4,6 +4,9 @@
         <label class="col-md-3 control-label">Estatus</label>
         <div class="col-md-6">
             {!! Form::select('is_active',[0=>'Inactivo',1=>'Activo'],$category->is_active,['class'=>'form-control','placeholder'=>'Selecciona un estatus']) !!}
+            @error('is_active')
+                <span class="text-danger">{{$message}}</span>
+            @enderror
         </div>
     </div>
 
@@ -11,6 +14,9 @@
         <label class="col-md-3 control-label">Nombre de la categoría</label>
         <div class="col-md-6">
             {!! Form::text('name',$category->name,['class'=>'form-control']) !!}
+            @error('name')
+                <span class="text-danger">{{$message}}</span>
+            @enderror
         </div>
     </div>
 
@@ -18,6 +24,9 @@
         <label class="col-md-3 control-label">SLUG</label>
         <div class="col-md-6">
             {!! Form::text('slug',$category->slug,['class'=>'form-control']) !!}
+            @error('slug')
+                <span class="text-danger">{{$message}}</span>
+            @enderror
         </div>
     </div>
 
@@ -25,6 +34,9 @@
         <label class="col-md-3 control-label">URL Imagen</label>
         <div class="col-md-6 d-flex">
             {!! Form::text('image_url',$category->image_url,['class'=>'form-control']) !!}
+            @error('image_url')
+                <span class="text-danger">{{$message}}</span>
+            @enderror
         </div>
 
         <div class="col-md-12 divider-top-md text-center">
