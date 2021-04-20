@@ -1,32 +1,24 @@
 <?php
 
 
-namespace App\Repositories\Admin\Categories;
+namespace App\Repositories\Admin\Products;
 
 
-use App\Interfaces\RepositoryModelInterface;
-use App\Models\Category;
-use Dotenv\Repository\RepositoryInterface;
+use App\Models\Product;
 
-class CategoryRepository implements RepositoryModelInterface
+class ProductRepository implements \App\Interfaces\RepositoryModelInterface
 {
 
     public $model;
 
     public function __construct()
     {
-        $this->model = new Category();
+        $this->model = new Product();
     }
 
     public function all(array $configurations)
     {
-        return $this->model->all(['id','slug','name','is_active']);
-    }
-
-    public function allPluck()
-    {
-        return $this->model->where('is_active',1)
-            ->pluck('name','id');
+        return $this->model->get(ProductHelper::$FIELDS_INDEX);
     }
 
     public function find($slug)
@@ -48,6 +40,6 @@ class CategoryRepository implements RepositoryModelInterface
     public function inactivate($slug)
     {
         $record = $this->find($slug);
-        return $record->fill(['is_active'=>0])->save();
+        return $record->fill(['is_active_to_shop'=>0])->save();
     }
 }
