@@ -22,11 +22,27 @@ class Product extends Model
         'recommendations',
         'stock',
         'min_purchases',
-        'user_id'
+        'user_id',
+        'is_active_to_shop'
     ];
 
     public function category()
     {
         return $this->hasOne(Category::class);
+    }
+
+    public function findBySlug($slug)
+    {
+        return $this->where('slug',$slug)->firstOrFail();
+    }
+
+    public function url()
+    {
+        return $this->id ? 'admin/products/'.$this->slug : 'admin/products';
+    }
+
+    public function method()
+    {
+        return $this->id ? 'PUT' : 'POST';
     }
 }

@@ -14,14 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Shop.pages.home');
 });
 
-
+Route::get('autentificacion',[\App\Http\Controllers\Shop\Auth\AuthController::class,'login_register_form']);
+Route::post('autentificacion/register',[\App\Http\Controllers\Shop\Auth\AuthController::class,'register']);
 
 Route::group(['prefix'=>'admin'],function(){
 
     Route::resource('categories',\App\Http\Controllers\Admin\CategoriesController::class);
+    Route::resource('products',\App\Http\Controllers\Admin\Products\ProductsController::class);
     Route::resource('users',\App\Http\Controllers\Admin\UsersController::class);
     Route::resource('clients',\App\Http\Controllers\Admin\ClientsController::class);
 });

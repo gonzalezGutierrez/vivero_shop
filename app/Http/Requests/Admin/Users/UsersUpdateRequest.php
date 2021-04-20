@@ -26,9 +26,7 @@ class UsersUpdateRequest extends FormRequest
         return [
             'name'=> ['required'],
             'last_name'=> ['required'],
-            'email'=> ['required','unique:users,email'],
-            'password'=> ['required','min:8','confirmed'],
-            'password_confirmation'=>['required'],
+            'email'=> ['required'],
             'phone'=> ['required'],
             'role_id'=> ['required']
         ];

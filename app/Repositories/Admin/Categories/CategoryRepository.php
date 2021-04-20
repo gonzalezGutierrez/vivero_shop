@@ -20,7 +20,13 @@ class CategoryRepository implements RepositoryModelInterface
 
     public function all(array $configurations)
     {
-        return $this->model->all();
+        return $this->model->all(['id','slug','name','is_active']);
+    }
+
+    public function allPluck()
+    {
+        return $this->model->where('is_active',1)
+            ->pluck('name','id');
     }
 
     public function find($slug)
