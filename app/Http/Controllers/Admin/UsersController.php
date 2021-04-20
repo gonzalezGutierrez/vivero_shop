@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Users\UsersStoreRequest;
 use App\Http\Requests\Admin\Users\UsersUpdateRequest;
+use App\Models\Role;
 use App\Repositories\Admin\Users\UserRepository;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,8 @@ class UsersController extends Controller
     public function create()
     {
         $user = $this->repository->model;
-        return view('Admin.users.create',compact('user'));
+        $roles= Role::pluck('role','id');
+        return view('Admin.users.create',compact('user','roles'));
     }
 
     public function store(UsersStoreRequest $request)
@@ -53,7 +55,8 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = $this->repository->find($id);
-        return view('Admin.users.edit',compact('user'));
+        $roles= Role::pluck('role','id');
+        return view('Admin.users.edit',compact('user','roles'));
     }
 
     public function update(UsersUpdateRequest $request, $id)
