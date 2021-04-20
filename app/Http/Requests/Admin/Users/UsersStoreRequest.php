@@ -24,12 +24,13 @@ class UsersStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=> ['requiered'],
-            'last_name'=> ['requiered'],
-            'email'=> ['requiered','unique:users,email'],
-            'password'=> ['requiered','min:8'],
-            'phone'=> ['requiered'],
-            'role_id'=> ['requiered']
+            'name'=> ['required'],
+            'last_name'=> ['required'],
+            'email'=> ['required','unique:users,email'],
+            'password'=> ['required','min:8','confirmed'],
+            'password_confirmation'=>['required'],
+            'phone'=> ['required'],
+            'role_id'=> ['required']
         ];
     }
 }

@@ -27,7 +27,8 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
-        'role_id'
+        'role_id',
+        'is_active'
     ];
 
     /**
@@ -52,6 +53,16 @@ class User extends Authenticatable
     public function role()
     {
         return $this->hasOne(Role::class);
+    }
+
+    public function url()
+    {
+        return $this->id ? 'admin/users/'.$this->id : 'admin/users';
+    }
+
+    public function method()
+    {
+        return $this->id ? 'PUT' : 'POST';
     }
 
     public function setPasswordAttribute($password)
