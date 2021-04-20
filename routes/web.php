@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Shop.pages.home');
 });
 
-
+Route::get('autentificacion',[\App\Http\Controllers\Shop\Auth\AuthController::class,'login_register_form']);
+Route::post('autentificacion/register',[\App\Http\Controllers\Shop\Auth\AuthController::class,'register']);
 
 Route::group(['prefix'=>'admin'],function(){
 

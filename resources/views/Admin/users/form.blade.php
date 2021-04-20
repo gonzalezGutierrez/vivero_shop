@@ -51,25 +51,27 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <label class="col-md-3 control-label">Password</label>
-        <div class="col-md-6">
-            {!! Form::password('password',['class'=>'form-control']) !!}
-            @error('password')
-                <span class="text-danger">{{$message}}</span>
-            @enderror
+    @if ($user->method() != 'PUT')
+        <div class="form-group">
+            <label class="col-md-3 control-label">Password</label>
+            <div class="col-md-6">
+                {!! Form::password('password',['class'=>'form-control']) !!}
+                @error('password')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label class="col-md-3 control-label">Confirmar Password</label>
-        <div class="col-md-6">
-            {!! Form::password('password_confirmation',['class'=>'form-control']) !!}
-            @error('password_confirmation')
-                <span class="text-danger">{{$message}}</span>
-            @enderror
+        <div class="form-group">
+            <label class="col-md-3 control-label">Confirmar Password</label>
+            <div class="col-md-6">
+                {!! Form::password('password_confirmation',['class'=>'form-control']) !!}
+                @error('password_confirmation')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
+            </div>
         </div>
-    </div>
+    @endif
 
     <div class="form-group">
         <label class="col-md-3 control-label">No. Telefono</label>
@@ -87,6 +89,6 @@
         </div>
     </div>
 
-   
+
 
 {!! Form::close() !!}
