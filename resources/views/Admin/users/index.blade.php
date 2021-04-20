@@ -52,7 +52,7 @@
                         <td style="line-height: 26.8px;">
                             <a href="{{asset('admin/users/'.$user->id.'/edit')}}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Actualizar</a>
 
-                            {!! Form::open(['url'=>$user->url(),'method'=>'delete','class'=>'form-inline-block']) !!}
+                            {!! Form::open(['url'=>$user->url('user'),'method'=>'delete','class'=>'form-inline-block']) !!}
 
                                 <button class="btn btn-sm btn-danger" {{$user->is_active == 0 ? 'disabled' : ''}}><i class="fa fa-times-circle"></i> Eliminar</button>
 

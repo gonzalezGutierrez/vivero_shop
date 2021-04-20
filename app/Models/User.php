@@ -55,8 +55,11 @@ class User extends Authenticatable
         return $this->hasOne(Role::class);
     }
 
-    public function url()
+    public function url($role)
     {
+        if ($role == 'client') {
+            return $this->id ? 'admin/clients/'.$this->id : 'admin/clients';
+        }
         return $this->id ? 'admin/users/'.$this->id : 'admin/users';
     }
 
