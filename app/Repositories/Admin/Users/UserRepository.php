@@ -19,7 +19,12 @@ class UserRepository implements RepositoryModelInterface
 
     public function all(array $configurations)
     {
-        return $this->model->all();
+        return $this->model->where('role_id','<>',3)->get();
+    }
+
+    public function all_clients()
+    {
+        return $this->model->where('role_id',3)->get();
     }
 
     public function find($id)
@@ -43,4 +48,6 @@ class UserRepository implements RepositoryModelInterface
         $record = $this->find($id);
         return $record->fill(['is_active'=>0])->save();
     }
+
+
 }

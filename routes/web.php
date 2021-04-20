@@ -23,4 +23,5 @@ Route::group(['prefix'=>'admin'],function(){
 
     Route::resource('categories',\App\Http\Controllers\Admin\CategoriesController::class);
     Route::resource('users',\App\Http\Controllers\Admin\UsersController::class);
+    Route::resource('clients',\App\Http\Controllers\Admin\ClientsController::class);
 });

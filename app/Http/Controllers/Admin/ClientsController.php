@@ -9,7 +9,7 @@ use App\Models\Role;
 use App\Repositories\Admin\Users\UserRepository;
 use Illuminate\Http\Request;
 
-class UsersController extends Controller
+class ClientsController extends Controller
 {
 
     protected $repository;
@@ -21,15 +21,15 @@ class UsersController extends Controller
 
     public function index()
     {
-        $users = $this->repository->all([]);
-        return view('Admin.users.index',compact('users'));
+        $users = $this->repository->all_clients([]);
+        return view('Admin.clients.index',compact('users'));
     }
 
     public function create()
     {
         $user = $this->repository->model;
-        $roles= Role::where('id','<>',3)->pluck('role','id');
-        return view('Admin.users.create',compact('user','roles'));
+        $roles= Role::pluck('role','id');
+        return view('Admin.clients.create',compact('user','roles'));
     }
 
     public function store(UsersStoreRequest $request)
@@ -48,7 +48,7 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = $this->repository->find($id);
-        return view('Admin.users.show',compact('user'));
+        return view('Admin.clients.show',compact('user'));
     }
 
 
@@ -56,7 +56,7 @@ class UsersController extends Controller
     {
         $user = $this->repository->find($id);
         $roles= Role::pluck('role','id');
-        return view('Admin.users.edit',compact('user','roles'));
+        return view('Admin.clients.edit',compact('user','roles'));
     }
 
     public function update(UsersUpdateRequest $request, $id)
