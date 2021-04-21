@@ -26,4 +26,5 @@ Route::group(['prefix'=>'admin'],function(){
     Route::resource('products',\App\Http\Controllers\Admin\Products\ProductsController::class);
     Route::resource('users',\App\Http\Controllers\Admin\UsersController::class);
     Route::resource('clients',\App\Http\Controllers\Admin\ClientsController::class);
+    Route::resource('gallery/{product}',\App\Http\Controllers\Admin\GalleryPhotosController::class);
 });

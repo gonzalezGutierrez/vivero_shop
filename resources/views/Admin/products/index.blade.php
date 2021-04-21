@@ -61,6 +61,7 @@
 
                             {!! Form::close() !!}
 
+                            <a href="{{asset('admin/gallery/'.$product->slug)}}" class="btn btn-sm btn-info"><i class="fa fa-image"></i> Galeria</a>
                         </td>
                     </tr>
                 @endforeach
