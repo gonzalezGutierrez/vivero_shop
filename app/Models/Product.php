@@ -28,12 +28,12 @@ class Product extends Model
 
     public function category()
     {
-        return $this->hasOne(Category::class);
+        return $this->belongsTo(Category::class,'category_id');
     }
 
     public function findBySlug($slug)
     {
-        return $this->where('slug',$slug)->firstOrFail();
+        return $this->with('category')->where('slug',$slug)->firstOrFail();
     }
 
     public function url()

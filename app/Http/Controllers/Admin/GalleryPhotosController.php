@@ -24,7 +24,7 @@ class GalleryPhotosController extends Controller
     {
         $product = $this->productRepository->find($product_slug);
         $images = $this->repository->all(['product_id'=>$product->id]);
-        return view('Admin.gallery.index',compact('images'));
+        return view('Admin.gallery.index',compact('images','product'));
     }
 
     public function create()
