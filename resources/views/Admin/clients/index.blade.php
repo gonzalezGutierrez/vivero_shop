@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
-@section('title','Usuarios')
+@section('title','Clientes')
 
 @section('header_section')
 
     <header class="page-header">
-        <h2>Usuarios</h2>
+        <h2>Clientes</h2>
 
         <div class="right-wrapper pull-right">
             <ol class="breadcrumbs">
@@ -14,7 +14,7 @@
                         <i class="fa fa-home"></i>
                     </a>
                 </li>
-                <li><span>Usuarios</span></li>
+                <li><span>Clientes</span></li>
             </ol>
 
             <a class="sidebar-right-toggle" data-open="sidebar-right"></a>
@@ -50,9 +50,9 @@
                             @include('Admin.components.status',['status'=>$user->is_active])
                         </td>
                         <td style="line-height: 26.8px;">
-                            <a href="{{asset('admin/users/'.$user->id.'/edit')}}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Actualizar</a>
+                            <a href="{{asset('admin/clients/'.$user->id.'/edit')}}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Actualizar</a>
 
-                            {!! Form::open(['url'=>$user->url(),'method'=>'delete','class'=>'form-inline-block']) !!}
+                            {!! Form::open(['url'=>$user->url('client'),'method'=>'delete','class'=>'form-inline-block']) !!}
 
                                 <button class="btn btn-sm btn-danger" {{$user->is_active == 0 ? 'disabled' : ''}}><i class="fa fa-times-circle"></i> Eliminar</button>
 

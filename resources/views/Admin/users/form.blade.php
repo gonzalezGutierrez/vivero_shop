@@ -1,5 +1,4 @@
-{!! Form::open(['url'=>$user->url(),'method'=>$user->method(),'class'=>'form-horizontal form-bordered']) !!}
-
+{!! Form::open(['url'=>$user->url($role),'method'=>$user->method(),'class'=>'form-horizontal form-bordered']) !!}
     <div class="form-group">
         <label class="col-md-3 control-label">Estatus</label>
         <div class="col-md-6">

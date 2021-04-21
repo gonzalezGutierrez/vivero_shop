@@ -38,7 +38,7 @@
                     <a href="{{asset('admin/users')}}" class="btn btn-sm btn-danger"><i class="fa fa-chevron-circle-left"></i> Cancelar</a>
                 </header>
                 <div class="panel-body">
-                    @include('Admin.users.form')
+                    @include('Admin.users.form',['role'=>'user'])
                 </div>
             </section>
 

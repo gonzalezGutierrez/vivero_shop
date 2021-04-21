@@ -28,7 +28,7 @@ class ClientsController extends Controller
     public function create()
     {
         $user = $this->repository->model;
-        $roles= Role::pluck('role','id');
+        $roles= Role::where('id',3)->pluck('role','id');
         return view('Admin.clients.create',compact('user','roles'));
     }
 
@@ -38,7 +38,7 @@ class ClientsController extends Controller
 
             $this->repository->create($request->all());
 
-            return redirect('admin/users')->with('status_success','El usuario fue agregada correctamente');
+            return redirect('admin/clients')->with('status_success','El usuario fue agregada correctamente');
 
         }catch (\Exception $exception) {
             dd($exception);
@@ -55,7 +55,7 @@ class ClientsController extends Controller
     public function edit($id)
     {
         $user = $this->repository->find($id);
-        $roles= Role::pluck('role','id');
+        $roles = Role::where('id',3)->pluck('role','id');
         return view('Admin.clients.edit',compact('user','roles'));
     }
 
@@ -64,7 +64,7 @@ class ClientsController extends Controller
         try {
 
             $this->repository->update($request->all(),$id);
-            return redirect('admin/users')->with('status_success','El usuario fue actualizado correctamente');
+            return redirect('admin/clients')->with('status_success','El usuario fue actualizado correctamente');
 
         }catch (\Exception $exception){
             dd($exception);
@@ -75,7 +75,7 @@ class ClientsController extends Controller
     {
         try {
             $this->repository->inactivate($id);
-            return redirect('admin/users')->with('status_success','El usuario fue dado de baja correctamente');
+            return redirect('admin/clients')->with('status_success','El usuario fue dado de baja correctamente');
         }catch (\Exception $exception) {
             dd($exception);
         }
