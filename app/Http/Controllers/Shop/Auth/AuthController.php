@@ -32,4 +32,15 @@ class AuthController extends Controller
         return redirect('/');
 
     }
+
+    public function login(Request $request)
+    {
+
+        $data = $request->only(['email_login','password_login']);
+
+        $userRepository = new UserRepository();
+
+        $user = $userRepository->find($data['email_login']);
+
+    }
 }
