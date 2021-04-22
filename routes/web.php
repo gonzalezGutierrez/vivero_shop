@@ -24,6 +24,7 @@ Route::resource('productos',\App\Http\Controllers\Shop\Products\ProductsControll
 
 
 Route::get('contacto',[\App\Http\Controllers\Shop\Pages\PageController::class,'contact']);
+Route::get('nosotros',[\App\Http\Controllers\Shop\Pages\PageController::class,'about']);
 
 Route::group(['prefix'=>'admin'],function(){
 
