@@ -36,3 +36,15 @@ table tbody tr {
 .form-inline-block {
     display: inline-block;
 }
+
+.image__btns__actions {
+    position: absolute;
+    top:5%;
+    left:75%;
+    text-align: center;
+}
+
+.c_pointer {
+    cursor: pointer;
+}
+

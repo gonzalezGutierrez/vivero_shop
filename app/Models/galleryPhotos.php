@@ -15,12 +15,15 @@ class galleryPhotos extends Model
     protected $fillable = [
         'title',
         'image_url',
+        'product_id',
         'is_active'
     ];
 
-    public function url($role)
+    public function url($product_slug)
     {
-        return $this->id ? 'admin/galley/'.$this->slug : 'admin/gallery';
+        return $this->id != null 
+            ? 'admin/products/'.$product_slug.'/gallery/'.$this->id
+            : 'admin/products/'.$product_slug.'/gallery';
     }
 
     public function method()

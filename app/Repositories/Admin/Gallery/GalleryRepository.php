@@ -22,12 +22,13 @@ class GalleryRepository implements RepositoryModelInterface
     {
         $productId = $configurations['product_id'];
         return $this->model->where('product_id',$productId)
+            ->where('is_active',1)
             ->get(['id','title','image_url','is_active']);
     }
 
     public function find($id)
     {
-        return $this->model->findBySlug($id);
+        return $this->model->findOrFail($id);
     }
 
     public function create(array $data)

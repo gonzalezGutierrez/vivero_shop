@@ -53,6 +53,7 @@
                             @include('Admin.components.status',['status'=>$product->is_active_to_shop])
                         </td>
                         <td style="line-height: 26.8px;">
+
                             <a href="{{asset('admin/products/'.$product->slug.'/edit')}}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Actualizar</a>
 
                             {!! Form::open(['url'=>$product->url(),'method'=>'delete','class'=>'form-inline-block']) !!}
@@ -61,7 +62,7 @@
 
                             {!! Form::close() !!}
 
-                            <a href="{{asset('admin/gallery/'.$product->slug)}}" class="btn btn-sm btn-info"><i class="fa fa-image"></i> Galeria</a>
+                            <a href="{{asset('admin/products/'.$product->slug.'/gallery')}}" class="btn btn-sm btn-info"><i class="fa fa-image"></i> Galeria</a>
                         </td>
                     </tr>
                 @endforeach

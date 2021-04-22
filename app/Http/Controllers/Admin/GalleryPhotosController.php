@@ -23,27 +23,35 @@ class GalleryPhotosController extends Controller
     public function index($product_slug)
     {
         $product = $this->productRepository->find($product_slug);
-        $images = $this->repository->all(['product_id'=>$product->id]);
-        return view('Admin.gallery.index',compact('images','product'));
+        $images  = $this->repository->all(['product_id'=>$product->id]);
+        $gallery = $this->repository->model;
+        return view('Admin.gallery.index',compact('images','product','gallery'));
     }
 
-    public function create()
+    public function store(Request $request,$product_slug)
     {
-        $galleries = $this->repository->model;
-        return view('Admin.gallery.create',compact('galleries'));
-    }
+        try{
+            
+            $product = $this->productRepository->find($product_slug);
 
-    public function show($id)
-    {
-        $gallery = $this->repository->find($id);
-        return view('Admin.categories.show',compact('gallery'));
-    }
+            //enviar a un middleware
+            $images  = $this->repository->all(['product_id'=>$product->id]);
 
+            if ( $images->count() == 6) {
+                return back()->with('status_warning','Ya no tienes espacio para agregar una nueva foto');
+            }
 
-    public function edit($id)
-    {
-        $gallery = $this->repository->find($id);
-        return view('Admin.gallery.edit',compact('gallery'));
+            $this->repository->create([
+                'title'=>$request->title,
+                'image_url'=>$request->image_url,
+                'product_id'=>$product->id
+            ]);
+
+            return back()->with('status_success','Imagen agregada correctamente...');
+
+        }catch(\Exception $exception) {
+            dd($exception);
+        }
     }
 
     public function update(GalleriesStoreRequest $request, $id)
@@ -58,11 +66,11 @@ class GalleryPhotosController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function destroy($product_slug,$id)
     {
         try {
             $this->repository->inactivate($id);
-            return redirect('admin/categories')->with('status_success','La imagen fue dada de baja correctamente');
+            return redirect('admin/products/'.$product_slug.'/gallery')->with('status_success','La imagen fue dada de baja correctamente');
         }catch (\Exception $exception) {
             dd($exception);
         }
