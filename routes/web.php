@@ -20,11 +20,26 @@ Route::get('/', function () {
 Route::get('autentificacion',[\App\Http\Controllers\Shop\Auth\AuthController::class,'login_register_form']);
 Route::post('autentificacion/register',[\App\Http\Controllers\Shop\Auth\AuthController::class,'register']);
 
+Route::resource('productos',\App\Http\Controllers\Shop\Products\ProductsController::class)->only(['index','show']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::group(['prefix'=>'admin'],function(){
 
     Route::resource('categories',\App\Http\Controllers\Admin\CategoriesController::class);
     Route::resource('products',\App\Http\Controllers\Admin\Products\ProductsController::class);
     Route::resource('users',\App\Http\Controllers\Admin\UsersController::class);
     Route::resource('clients',\App\Http\Controllers\Admin\ClientsController::class);
-    Route::resource('gallery/{product}',\App\Http\Controllers\Admin\GalleryPhotosController::class);
 });

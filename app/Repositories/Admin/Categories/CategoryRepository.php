@@ -50,4 +50,13 @@ class CategoryRepository implements RepositoryModelInterface
         $record = $this->find($slug);
         return $record->fill(['is_active'=>0])->save();
     }
+
+    public function categoriesSHOP()
+    {
+        return $this->model->where('is_active',1)
+            ->with('products')
+            ->orderBy('id','DESC')
+            ->select(['id','name','slug','created_at'])
+            ->get();
+    }
 }

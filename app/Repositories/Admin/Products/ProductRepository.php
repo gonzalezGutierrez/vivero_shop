@@ -42,4 +42,17 @@ class ProductRepository implements \App\Interfaces\RepositoryModelInterface
         $record = $this->find($slug);
         return $record->fill(['is_active_to_shop'=>0])->save();
     }
+
+    //SHOP
+    public function productsSHOP($category)
+    {
+        return $this->model->where('is_active_to_shop',1)
+            ->when($category != null,function ($query) use($category){
+                return $query->where('category_id',$category);
+            })
+            ->with('category')
+            ->orderBy('id','DESC')
+            ->select(ProductHelper::$FIELDS_SHOP_LIST)
+            ->paginate(15);
+    }
 }
