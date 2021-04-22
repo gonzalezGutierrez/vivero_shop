@@ -22,6 +22,9 @@ Route::post('autentificacion/register',[\App\Http\Controllers\Shop\Auth\AuthCont
 
 Route::resource('productos',\App\Http\Controllers\Shop\Products\ProductsController::class)->only(['index','show']);
 
+
+Route::get('contacto',[\App\Http\Controllers\Shop\Pages\PageController::class,'contact']);
+
 Route::group(['prefix'=>'admin'],function(){
 
     Route::resource('categories',\App\Http\Controllers\Admin\CategoriesController::class);
@@ -29,4 +32,5 @@ Route::group(['prefix'=>'admin'],function(){
     Route::resource('users',\App\Http\Controllers\Admin\UsersController::class);
     Route::resource('clients',\App\Http\Controllers\Admin\ClientsController::class);
     Route::resource('products/{product_slug}/gallery',\App\Http\Controllers\Admin\GalleryPhotosController::class);
+
 });
