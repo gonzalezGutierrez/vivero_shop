@@ -185,9 +185,10 @@
                                             </div>
 
                                             <p class="product-price"><span class="discounted-price">${{number_format($product->price,2,'.',',')}}</span> <span class="main-price discounted">${{number_format($product->price*1.10,2,'.',',')}}</span></p>
-
-                                            <a href="#" class="theme-button list-cart-button mb-10"> <i class="fa fa-shopping-cart"></i> Agregar</a>
-
+                                            
+                                            {!! Form::open(['url'=>asset('products_in_shopping_carts/'.$product->slug),'method'=>'POST']) !!}
+                                                <button type="submit" class="theme-button list-cart-button mb-10"> <i class="fa fa-shopping-cart"></i> Agregar</button>
+                                            {!! Form::close() !!}
                                             <div class="hover-icons">
                                                 <ul>
                                                     <li><a data-toggle = "modal" data-target="#quick-view-modal-container" href="javascript:void(0)"><i class="icon-eye"></i></a></li>
