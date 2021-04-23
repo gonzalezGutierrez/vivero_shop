@@ -192,7 +192,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{asset('admin/customers')}}">
+                                <a href="{{asset('admin/clients ')}}">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                     <span>Clientes</span>
                                 </a>
@@ -204,7 +204,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{asset('admin/users')}}">
+                                <a href="{{asset('admin/banners')}}">
                                     <i class="fa fa-image" aria-hidden="true"></i>
                                     <span>Banners</span>
                                 </a>

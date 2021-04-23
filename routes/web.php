@@ -33,5 +33,6 @@ Route::group(['prefix'=>'admin'],function(){
     Route::resource('users',\App\Http\Controllers\Admin\UsersController::class);
     Route::resource('clients',\App\Http\Controllers\Admin\ClientsController::class);
     Route::resource('products/{product_slug}/gallery',\App\Http\Controllers\Admin\GalleryPhotosController::class);
+    Route::resource('banners',\App\Http\Controllers\Admin\BannersController::class);
 
 });
