@@ -33,6 +33,7 @@ Route::delete('products_in_shopping_carts/{product_slug}',[\App\Http\Controllers
 Route::get('carrito',[\App\Http\Controllers\Shop\ShoppingCart\ShoppingCartController::class,'show'])->name('shopping_cart');
 
 Route::get('contacto',[\App\Http\Controllers\Shop\Pages\PageController::class,'contact']);
+Route::get('nosotros',[\App\Http\Controllers\Shop\Pages\PageController::class,'about']);
 
 
 
