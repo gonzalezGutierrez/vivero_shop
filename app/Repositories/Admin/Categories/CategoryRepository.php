@@ -6,7 +6,6 @@ namespace App\Repositories\Admin\Categories;
 
 use App\Interfaces\RepositoryModelInterface;
 use App\Models\Category;
-use Dotenv\Repository\RepositoryInterface;
 
 class CategoryRepository implements RepositoryModelInterface
 {

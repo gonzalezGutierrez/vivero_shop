@@ -230,14 +230,15 @@
                         <div class="product-short-desc mb-25">
                             <p>{{$product->description}}</p>
                         </div>
-
-                        <div class="quantity mb-20">
-                            <span class="quantity-title mr-20">Cant</span>
-                            <div class="pro-qty mr-15 mb-lg-20 mb-md-20 mb-sm-20">
-                                <input type="text" value="1">
+                        {!! Form::open(['url'=>'products_in_shopping_carts/'.$product->slug,'method'=>'POST']) !!}
+                            <div class="quantity mb-20">
+                                <span class="quantity-title mr-20">Cant</span>
+                                <div class="pro-qty mr-15 mb-lg-20 mb-md-20 mb-sm-20">
+                                    <input type="text" name="amount" value="{{$product->min_purchases}}">
+                                </div>
+                                <button type="submit" class="theme-button product-cart-button"> <i class="icon-shopping-cart"></i> Agregar al carrito</button>
                             </div>
-                            <button class="theme-button product-cart-button"> <i class="icon-shopping-cart"></i> Agregar al carrito</button>
-                        </div>
+                        {!! Form::close() !!}
                         <div class="wishlist-button d-inline-block">
                                 <a href="#"><i class="icon-heart"></i> Agregar a lista de deseos</a>
                         </div>
@@ -380,71 +381,30 @@
                                         </div>
                                     </div>
                                     <div class="rattings-wrapper">
-
-                                        <div class="sin-rattings">
-                                            <div class="ratting-author">
-                                                <h3>Cristopher Lee</h3>
-                                                <div class="ratting-star">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <span>(5)</span>
+                                        @foreach($reviews as $review)
+                                            <div class="sin-rattings">
+                                                <div class="ratting-author">
+                                                    <h3>{{$review->name}}</h3>
+                                                    <div class="ratting-star">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <span>({{$review->review_qualification}})</span>
+                                                    </div>
                                                 </div>
+                                                <p>{{$review->review}}</p>
                                             </div>
-                                            <p>enim ipsam voluptatem quia voluptas sit
-                                                aspernatur aut odit aut fugit, sed quia res eos
-                                                qui ratione voluptatem sequi Neque porro
-                                                quisquam est, qui dolorem ipsum quia dolor sit
-                                                amet, consectetur, adipisci veli</p>
-                                        </div>
-
-                                        <div class="sin-rattings">
-                                            <div class="ratting-author">
-                                                <h3>Rashed Mahmud</h3>
-                                                <div class="ratting-star">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <span>(5)</span>
-                                                </div>
-                                            </div>
-                                            <p>enim ipsam voluptatem quia voluptas sit
-                                                aspernatur aut odit aut fugit, sed quia res eos
-                                                qui ratione voluptatem sequi Neque porro
-                                                quisquam est, qui dolorem ipsum quia dolor sit
-                                                amet, consectetur, adipisci veli</p>
-                                        </div>
-
-                                        <div class="sin-rattings">
-                                            <div class="ratting-author">
-                                                <h3>Hasan Mubarak</h3>
-                                                <div class="ratting-star">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <span>(5)</span>
-                                                </div>
-                                            </div>
-                                            <p>enim ipsam voluptatem quia voluptas sit
-                                                aspernatur aut odit aut fugit, sed quia res eos
-                                                qui ratione voluptatem sequi Neque porro
-                                                quisquam est, qui dolorem ipsum quia dolor sit
-                                                amet, consectetur, adipisci veli</p>
-                                        </div>
+                                        @endforeach
 
                                     </div>
                                     <div class="ratting-form-wrapper fix">
-                                        <h3>Add your Comments</h3>
-                                        <form action="#">
+                                        <h3>Agrega tu review</h3>
+                                        {!! Form::open(['url'=>asset('productos/'.$product->slug.'/reviews'),'method'=>'POST']) !!}
                                             <div class="ratting-form row">
                                                 <div class="col-12 mb-15">
-                                                    <h5>Rating:</h5>
+                                                    <h5>Calificación:</h5>
                                                     <div class="ratting-star fix">
                                                         <i class="fa fa-star-o"></i>
                                                         <i class="fa fa-star-o"></i>
@@ -454,23 +414,29 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 col-12 mb-15">
-                                                    <label for="name">Name:</label>
-                                                    <input id="name" placeholder="Name" type="text">
+                                                    <label for="name">Nombre:</label>
+                                                    {!! Form::text('name','',['id'=>'name','placeholder'=>'Nombre']) !!}
+                                                    @error('name')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-md-6 col-12 mb-15">
-                                                    <label for="email">Email:</label>
-                                                    <input id="email" placeholder="Email" type="text">
+                                                    <label for="email">Correo electronico:</label>
+                                                    {!! Form::text('email','',['id'=>'name','placeholder'=>'Correo electronico']) !!}
                                                 </div>
                                                 <div class="col-12 mb-15">
-                                                    <label for="your-review">Your Review:</label>
-                                                    <textarea name="review" id="your-review"
-                                                              placeholder="Write a review"></textarea>
+                                                    <label for="your-review">Tu comentario:</label>
+                                                    {!! Form::textarea('review','',['id'=>'name','placeholder'=>'Escribe tu review']) !!}
+                                                    @error('review')
+                                                        <span class="text-danger">{{$message}}</span>
+                                                    @enderror
+                                                    
                                                 </div>
                                                 <div class="col-12">
-                                                    <input value="add review" type="submit">
+                                                    <input value="Agregar review" type="submit">
                                                 </div>
                                             </div>
-                                        </form>
+                                        {!! Form::close() !!}
                                     </div>
                                 </div>
 

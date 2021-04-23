@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Shop\Products;
 use App\Http\Controllers\Controller;
 use App\Repositories\Admin\Categories\CategoryRepository;
 use App\Repositories\Admin\Products\ProductRepository;
+use App\Repositories\Shop\Reviews\ReviewRepository;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -18,11 +19,17 @@ class ProductsController extends Controller
      * @var CategoryRepository
      */
     private $categoryRepository;
+    /**
+     * @var ReviewRepository
+     */
+    private $reviewRepository;
+
 
     public function __construct()
     {
-        $this->repository  = new ProductRepository();
+        $this->repository         = new ProductRepository();
         $this->categoryRepository = new CategoryRepository();
+        $this->reviewRepository   = new ReviewRepository();
     }
 
     public function index(Request $request)
@@ -46,8 +53,9 @@ class ProductsController extends Controller
 
     public function show($slug)
     {
-        $product = $this->repository->find($slug);
+        $product  = $this->repository->find($slug);
         $category = $product->category;
-        return view('Shop.Pages.Products.show',compact('product','category'));
+        $reviews  = $this->reviewRepository->all(['product_id'=>$product->id]);
+        return view('Shop.Pages.Products.show',compact('product','category','reviews'));
     }
 }

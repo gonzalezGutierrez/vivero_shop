@@ -54,18 +54,6 @@ class GalleryPhotosController extends Controller
         }
     }
 
-    public function update(GalleriesStoreRequest $request, $id)
-    {
-        try {
-
-            $this->repository->update($request->all(),$id);
-            return redirect('admin/gallery')->with('status_success','La imagen fue actualizada correctamente');
-
-        }catch (\Exception $exception){
-            dd($exception);
-        }
-    }
-
     public function destroy($product_slug,$id)
     {
         try {
