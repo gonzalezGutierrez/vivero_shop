@@ -240,7 +240,9 @@
                             </div>
                         {!! Form::close() !!}
                         <div class="wishlist-button d-inline-block">
-                                <a href="#"><i class="icon-heart"></i> Agregar a lista de deseos</a>
+                            {!! Form::open(['url'=>'products_in_wish_list/'.$product->slug,'method'=>'POST']) !!}
+                                <button type="submit" class="no-button wish_list_button"><i class="icon-heart"></i> Agregar a la lista de deseos</button>
+                            {!! Form::close() !!}
                         </div>
 
                         <div class="product-details-feature-wrapper d-flex justify-content-start mt-20">
@@ -288,10 +290,10 @@
                         </div>
 
                         <div class="social-share-buttons mt-20">
-                            <h3>share this product</h3>
+                            <h3>compartir este producto</h3>
                             <ul>
                                 <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a class="facebook" href="https://work.facebook.com/sharer.php?display=page&u={{asset('productos/'.$product->slug)}}"><i class="fa fa-facebook"></i></a></li>
                                 <li><a class="google-plus" href="#"><i class="fa fa-google-plus"></i></a></li>
                                 <li><a class="pinterest" href="#"><i class="fa fa-pinterest"></i></a></li>
                             </ul>
@@ -430,7 +432,7 @@
                                                     @error('review')
                                                         <span class="text-danger">{{$message}}</span>
                                                     @enderror
-                                                    
+
                                                 </div>
                                                 <div class="col-12">
                                                     <input value="Agregar review" type="submit">

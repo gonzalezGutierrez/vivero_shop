@@ -29,35 +29,36 @@
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30">
                     <!-- Login Form s-->
-                    <form action="#" >
-
+                    <form action="{{asset('autentificacion/login')}}" method="POST" >
+                        @csrf
                         <div class="login-form">
                             <h4 class="login-title">Acceder</h4>
 
                             <div class="row">
                                 <div class="col-md-12 col-12 mb-20">
-                                    <label>Email Address*</label>
-                                    <input class="mb-0" type="email" placeholder="Email Address">
+                                    <label>Correo electronico*</label>
+                                    <input class="mb-0" type="email" value="{{old('email_login')}}" name="email_login" placeholder="Correo electronico">
+                                    @error('email_login')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-12 mb-20">
-                                    <label>Password</label>
-                                    <input class="mb-0" type="password" placeholder="Password">
+                                    <label>Contraseña</label>
+                                    <input class="mb-0" type="password"  name="password_login" placeholder="Contraseña">
                                 </div>
-                                <div class="col-md-8">
-
+                                <div class="col-md-7">
                                     <div class="check-box d-inline-block ml-0 ml-md-2 mt-10">
                                         <input type="checkbox" id="remember_me">
-                                        <label for="remember_me">Remember me</label>
+                                        <label for="remember_me">Recuerdame</label>
                                     </div>
-
                                 </div>
 
-                                <div class="col-md-4 mt-10 mb-20 text-left text-md-right">
-                                    <a href="#"> Forgotten pasward?</a>
+                                <div class="col-md-5 mt-10 mb-20 text-left text-md-right">
+                                    <a href="#">¿Olvidaste tu contraseña?</a>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <button class="register-button mt-0">Login</button>
+                                    <button type="submit" class="register-button mt-0">Acceder</button>
                                 </div>
 
                             </div>

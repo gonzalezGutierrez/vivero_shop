@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','Contacto')
+@section('title','El rinconcito verde')
 @section('content')
 <!--====================  breadcrumb area ====================-->
 <div class="breadcrumb-area pt-10 pb-10 border-bottom mb-40">

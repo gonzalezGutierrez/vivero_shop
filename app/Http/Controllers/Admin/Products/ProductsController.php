@@ -75,6 +75,7 @@ class ProductsController extends Controller
 
         }catch (\Exception $exception) {
             dd($exception);
+            dd(1);
         }
     }
 

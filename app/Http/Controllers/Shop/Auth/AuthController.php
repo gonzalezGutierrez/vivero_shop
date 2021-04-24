@@ -7,6 +7,7 @@ use App\Http\Requests\Shop\Register\RegisterRequest;
 use App\Repositories\Admin\Users\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -40,7 +41,27 @@ class AuthController extends Controller
 
         $userRepository = new UserRepository();
 
-        $user = $userRepository->find($data['email_login']);
+        $user = $userRepository->findByAttribute('email',$data['email_login'])->first();
 
+        if ($user) {
+
+            if (Hash::check($data['password_login'],$user->password)) {
+
+                Auth::loginUsingId($user->id);
+
+                return redirect('/');
+
+            }
+
+        }
+
+        return back()->withErrors(['email_login'=>trans('auth.failed')])->withInput();
+
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/autentificacion');
     }
 }

@@ -32,6 +32,11 @@ class UserRepository implements RepositoryModelInterface
         return $this->model->findOrFail($id);
     }
 
+    public function findByAttribute($attr,$value)
+    {
+        return $this->model->where($attr,$value);
+    }
+
     public function create(array $data)
     {
         return $this->model->create($data);

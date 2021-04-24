@@ -17,10 +17,10 @@ Route::get('/', function () {
     return view('Shop.pages.home');
 });
 
-Route::get('autentificacion',[\App\Http\Controllers\Shop\Auth\AuthController::class,'login_register_form']);
+Route::get('autentificacion',[\App\Http\Controllers\Shop\Auth\AuthController::class,'login_register_form'])->name('login');
 Route::post('autentificacion/register',[\App\Http\Controllers\Shop\Auth\AuthController::class,'register']);
-
-
+Route::post('autentificacion/login',[\App\Http\Controllers\Shop\Auth\AuthController::class,'login']);
+Route::get('autentificacion/_logout',[\App\Http\Controllers\Shop\Auth\AuthController::class,'logout'])->middleware('auth');
 
 Route::resource('productos',\App\Http\Controllers\Shop\Products\ProductsController::class)->only(['index','show']);
 
@@ -29,13 +29,15 @@ Route::resource('productos/{product_slug}/reviews',\App\Http\Controllers\Shop\Re
 Route::post('products_in_shopping_carts/{product_slug}',[\App\Http\Controllers\Shop\ProductsInShoppingCarts\ProductsInShoppingCartController::class,'store']);
 Route::delete('products_in_shopping_carts/{product_slug}',[\App\Http\Controllers\Shop\ProductsInShoppingCarts\ProductsInShoppingCartController::class,'destroy']);
 
-
 Route::get('carrito',[\App\Http\Controllers\Shop\ShoppingCart\ShoppingCartController::class,'show'])->name('shopping_cart');
+
+Route::get('wish_list',[\App\Http\Controllers\Shop\WishList\WishListController::class,'show'])->middleware('auth');
+Route::delete('wish_list',[\App\Http\Controllers\Shop\WishList\WishListController::class,'destroy'])->middleware('auth');
+
+Route::post('products_in_wish_list/{product_slug}',[\App\Http\Controllers\Shop\ProductInWishList\ProductsInWishListController::class,'store'])->middleware('auth');
 
 Route::get('contacto',[\App\Http\Controllers\Shop\Pages\PageController::class,'contact']);
 Route::get('nosotros',[\App\Http\Controllers\Shop\Pages\PageController::class,'about']);
-
-
 
 
 Route::group(['prefix'=>'admin'],function(){
