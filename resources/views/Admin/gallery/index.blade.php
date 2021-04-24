@@ -102,7 +102,7 @@
                                             <img src="{{$image->image_url}}" class="c_pointer image_gallery" style="width: 100%;" alt="">
                                             <div class="image__btns__actions">
                                                 <div class="social-icons-list">
-                                                    {!! Form::open(['url'=>$image->url($product->slug),'method'=>'DELETE']) !!}
+                                                    {!! Form::open(['url'=>$image->url($product->slug),'method'=>$image->method()]) !!}
                                                     <button type="submit" class="btn btn-warning btn-sm" style="border-radius: 50%; width:30px; height:30px;" rel="tooltip" class="c_pointer" data-placement="bottom"  data-original-title="Eliminar"><i class="fa fa-times"></i><span></span></button>
                                                     {!! Form::close() !!}
                                                 </div>
@@ -114,7 +114,7 @@
                         </section>
                     </div>
                     <div id="edit" class="tab-pane">
-                        {!! Form::open(['url'=>$gallery->url($product->slug),'method'=>$gallery->method()]) !!}
+                        {!! Form::open(['url'=>$image->url(),'method'=>$image->method()]) !!}
                             <h4 class="mb-xlg">Agregar imágenes</h4>
                             <fieldset>
                                 <div class="form-group">

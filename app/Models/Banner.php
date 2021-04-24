@@ -21,7 +21,7 @@ class Banner extends Model
 
     public function url()
     {
-        return $this->id ? 'admin/banners/'.$this->slug : 'admin/banners';
+        return $this->id ? 'admin/banners/'.$this->id : 'admin/banners';
     }
 
     public function method()

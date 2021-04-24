@@ -34,7 +34,6 @@
                <div class="d-flex">
                   <h4 class="mb-md">Banners disponibles</h4>
                   <span class="label-info label" style="padding: 5px;"> <i class="fa fa-image"></i></span>
-
                </div>
                <div class="row">
                   @foreach($banners as $banner)
@@ -43,9 +42,9 @@
                            <img src="{{$banner->image_url}}" class="c_pointer image_gallery" style="width: 100%;" alt="">
                            <div class="image__btns__actions">
                               <div class="social-icons-list">
-                                    {!! Form::open(['url'=>$banner->url(),'method'=>'DELETE']) !!}
+                                 {!! Form::open(['url'=>$banner->url(),'method'=>'delete']) !!}
                                        <button type="submit" class="btn btn-warning btn-sm" style="border-radius: 50%; width:30px; height:30px;" rel="tooltip" class="c_pointer" data-placement="bottom"  data-original-title="Eliminar"><i class="fa fa-times"></i><span></span></button>
-                                    {!! Form::close() !!}
+                                       {!! Form::close() !!}
                               </div>
                            </div>
                         </div>
@@ -55,23 +54,25 @@
             </div>
             <div id="edit" class="tab-pane">
                <h4 class="mb-xlg">Nuevo Banner</h4>
-               <fieldset>
-                  <div class="form-group">
-                     <label class="col-md-3 control-label" for="profileFirstName">Titulo</label>
-                     <div class="col-md-8">
-                        {!! Form::text('title','',['class'=>'form-control']) !!}
+               {!! Form::open(['url'=>$banner->url(),'method'=>$banner->method()]) !!}
+                  <fieldset>
+                     <div class="form-group">
+                        <label class="col-md-3 control-label" for="profileFirstName">Titulo</label>
+                        <div class="col-md-8">
+                           {!! Form::text('title','',['class'=>'form-control']) !!}
+                        </div>
                      </div>
-                  </div>
-                  <div class="form-group">
-                     <label class="col-md-3 control-label" for="profileLastName">URL Imágen</label>
-                     <div class="col-md-8">
-                        {!! Form::text('image_url','',['class'=>'form-control']) !!}
+                     <div class="form-group">
+                        <label class="col-md-3 control-label" for="profileLastName">URL Imágen</label>
+                        <div class="col-md-8">
+                           {!! Form::text('image_url','',['class'=>'form-control']) !!}
+                        </div>
                      </div>
+                  </fieldset>
+                  <div class="panel-footer text-center">
+                     <button class="btn btn-primary btn-sm"><i class="fa fa-check-circle"></i> Guardar</button>
                   </div>
-               </fieldset>
-               <div class="panel-footer text-center">
-
-               </div>
+               {!! Form::close() !!}
             </div>
          </div>
       </div>

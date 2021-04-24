@@ -21,52 +21,15 @@ class BannersController extends Controller
     public function index()
     {
         $banners = $this->repository->all([]);
-        return view('Admin.banners.index',compact('banners'));
+        $banner  = $this->repository->model;
+        return view('Admin.banners.index',compact('banners','banner'));
     }
 
-    public function store(Request $request,$product_slug)
-    {
-        try{
-
-            $product = $this->productRepository->find($product_slug);
-
-            //enviar a un middleware
-            $images  = $this->repository->all(['product_id'=>$product->id]);
-
-            if ( $images->count() == 6) {
-                return back()->with('status_warning','Ya no tienes espacio para agregar una nueva foto');
-            }
-
-            $this->repository->create([
-                'title'=>$request->title,
-                'image_url'=>$request->image_url,
-                'product_id'=>$product->id
-            ]);
-
-            return back()->with('status_success','Imagen agregada correctamente...');
-
-        }catch(\Exception $exception) {
-            dd($exception);
-        }
-    }
-
-    public function update(GalleriesStoreRequest $request, $id)
-    {
-        try {
-
-            $this->repository->update($request->all(),$id);
-            return redirect('admin/gallery')->with('status_success','La imagen fue actualizada correctamente');
-
-        }catch (\Exception $exception){
-            dd($exception);
-        }
-    }
-
-    public function destroy($product_slug,$id)
+    public function destroy($id)
     {
         try {
             $this->repository->inactivate($id);
-            return redirect('admin/products/'.$product_slug.'/gallery')->with('status_success','La imagen fue dada de baja correctamente');
+            return redirect('admin/banners')->with('status_success','El banner fue dada de baja correctamente');
         }catch (\Exception $exception) {
             dd($exception);
         }

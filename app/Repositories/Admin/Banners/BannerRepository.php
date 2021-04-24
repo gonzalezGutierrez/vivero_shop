@@ -20,7 +20,8 @@ class BannerRepository implements RepositoryModelInterface
 
     public function all(array $configurations)
     {
-        return $this->model->get(['id','title','image_url','is_active','redirect_to']);
+        return $this->model->where('is_active',1)
+            ->get(['id','title','image_url','is_active','redirect_to']);
     }
 
     public function find($id)
