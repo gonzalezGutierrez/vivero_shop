@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class BannersController extends Controller
 {
+    
     protected $repository;
     protected $bannerRepository;
 

@@ -17,16 +17,21 @@ class CategoriesController extends Controller
         $this->repository = new CategoryRepository();
     }
 
-    public function index()
+    
+
+    public function index(Request $request)
     {
-        $categories = $this->repository->all([]);
-        return view('Admin.categories.index',compact('categories'));
+
+        $option = $request->option;
+        $categories = $this->repository->get_categories_or_subcategories($option);
+        return view('Admin.categories.index',compact('categories','option'));
     }
 
     public function create()
     {
         $category = $this->repository->model;
-        return view('Admin.categories.create',compact('category'));
+        $categories = $this->repository->allPluck();
+        return view('Admin.categories.create',compact('category','categories'));
     }
 
     public function store(CategoryStoreRequest $request)
@@ -51,8 +56,9 @@ class CategoriesController extends Controller
 
     public function edit($slug)
     {
+        $categories = $this->repository->allPluck();
         $category = $this->repository->find($slug);
-        return view('Admin.categories.edit',compact('category'));
+        return view('Admin.categories.edit',compact('category','categories'));
     }
 
     public function update(CategoryStoreRequest $request, $slug)

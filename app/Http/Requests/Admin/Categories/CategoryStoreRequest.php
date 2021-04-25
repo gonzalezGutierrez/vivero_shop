@@ -27,7 +27,7 @@ class CategoryStoreRequest extends FormRequest
             'name'=>['required'],
             'slug'=>['required'],
             'is_active'=>['required'],
-            'image_url'=>['required'],
+            'image_url'=>[''],
             'description'=>['']
         ];
     }

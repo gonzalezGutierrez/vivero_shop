@@ -17,9 +17,40 @@ class CategoryRepository implements RepositoryModelInterface
         $this->model = new Category();
     }
 
+    public function get_categories_or_subcategories($option)
+    {
+        switch($option)
+        {
+            case 'categories' : {
+                return $this->all([]);
+                break;
+            }
+            case 'sub_categories' : {
+                return $this->sub_categories();
+                break;
+            }
+
+            case '' : {
+                return $this->all([]);
+            }
+
+            default : {
+                abort(404);
+                break;
+            }
+        }
+    }
+
     public function all(array $configurations)
     {
-        return $this->model->all(['id','slug','name','is_active']);
+        return $this->model->with('sub_categories')->where('parent_id',null)
+        ->get(['id','slug','name','parent_id','is_active']);
+    }
+
+    public function sub_categories()
+    {
+        return $this->model->where('parent_id','<>',null)          
+            ->get(['id','slug','name','parent_id','is_active']);
     }
 
     public function allPluck()

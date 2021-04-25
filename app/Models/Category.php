@@ -17,11 +17,22 @@ class Category extends Model
         'slug',
         'image_url',
         'description',
+        'parent_id',
         'is_active'
     ];
 
     public function products() {
         return $this->hasMany(Product::class);
+    }
+
+    public function sub_categories()
+    {
+        return $this->hasMany(Category::class,'parent_id');
+    }
+
+    public function parent_category() 
+    {
+        return $this->belongsToMany(Category::class,'parent_id');
     }
 
     public function findBySlug($slug)

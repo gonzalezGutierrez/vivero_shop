@@ -1,7 +1,7 @@
 {!! Form::open(['url'=>$category->url(),'method'=>$category->method(),'class'=>'form-horizontal form-bordered']) !!}
 
     <div class="form-group">
-        <label class="col-md-3 control-label">Estatus</label>
+        <label class="col-md-3 control-label">Estatus <span class="text-danger">*</span></label>
         <div class="col-md-6">
             {!! Form::select('is_active',[0=>'Inactivo',1=>'Activo'],$category->is_active,['class'=>'form-control','placeholder'=>'Selecciona un estatus']) !!}
             @error('is_active')
@@ -11,7 +11,14 @@
     </div>
 
     <div class="form-group">
-        <label class="col-md-3 control-label">Nombre de la categoría</label>
+        <label class="col-md-3 control-label">¿Tiene una categoría padre ?</label>
+        <div class="col-md-6">
+            {!! Form::select('parent_id',$categories,$category->parent_id,['class'=>'form-control','placeholder'=>'Selecciona una categoría']) !!}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-3 control-label">Nombre de la categoría <span class="text-danger">*</span></label>
         <div class="col-md-6">
             {!! Form::text('name',$category->name,['class'=>'form-control','id'=>'name']) !!}
             @error('name')
@@ -21,7 +28,7 @@
     </div>
 
     <div class="form-group">
-        <label class="col-md-3 control-label">SLUG</label>
+        <label class="col-md-3 control-label">SLUG <span class="text-danger">*</span></label>
         <div class="col-md-6">
             {!! Form::text('slug',$category->slug,['class'=>'form-control','id'=>'slug']) !!}
             @error('slug')
@@ -31,7 +38,7 @@
     </div>
 
     <div class="form-group">
-        <label class="col-md-3 control-label">URL Imagen</label>
+        <label class="col-md-3 control-label">URL Imagen </label>
         <div class="col-md-6 d-flex">
             {!! Form::text('image_url',$category->image_url,['class'=>'form-control']) !!}
             @error('image_url')
