@@ -11,29 +11,11 @@
                     <!--=======  breadcrumb content  =======-->
 
                     <div class="breadcrumb-content">
-                        @if ($sidebar == 'sidebar_categories')
-                            <ul>
-                                <li class="has-child"><a href="{{asset('/')}}">Inicio</a></li>
-                                <li>Productos</li>
-                            </ul>
-                        @endif
-
-                        @if ( $sidebar == 'sidebar_category_selected' )
-                            <ul>
-                                <li class="has-child"><a href="{{asset('/')}}">Inicio</a></li>
-                                <li class="has-child"><a href="{{asset('/productos')}}">Productos</a></li>
-                                <li>{{$category->name}}</li>
-                            </ul>
-                        @endif
-
-                        @if ($sidebar == 'sidebar_sub_category_selected') 
-                            <ul>
-                                <li class="has-child"><a href="{{asset('/')}}">Inicio</a></li>
-                                <li class="has-child"><a href="{{asset('/productos')}}">Productos</a></li>
-                                <li class="has-child"><a href="{{asset('/productos/categoria/'.$category->slug)}}">{{$category->name}}</a></li>
-                                <li>{{$subcategory->name}}</li>
-                            </ul>
-                        @endif
+                        <ul>
+                            <li class="has-child"><a href="{{asset('/')}}">Inicio</a></li>
+                            <li class="has-child"><a href="{{asset('/productos')}}">Productos</a></li>
+                            <li>{{$category->name}}</li>
+                        </ul>
                     </div>
 
                     <!--=======  End of breadcrumb content  =======-->
@@ -54,7 +36,16 @@
                         <div class="sidebar-widget-wrapper mb-30">
                             <!--=======  sidebar widget  =======-->
 
-                            @include('Shop.Pages.Products.'.$sidebar)
+                            <div class="sidebar-widget">
+                                <h3 class="sidebar-widget-title">{{$category->name}}</h3>
+                                <ul class="category-list">
+                                    @foreach($subcategories as $subcategory)
+                                        <li>
+                                            <a class="" href="{{asset('productos/categoria/'.$category->slug.'/'.$subcategory->slug)}}" >{{$subcategory->name}}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
                             <!--=======  End of sidebar widget  =======-->
 
                             <!--=======  sidebar widget  =======-->
@@ -70,7 +61,15 @@
                         </div>
                         <!--=======  End of widget wrapper  =======-->
 
-                        
+                        <!--=======  page sidebar banner  =======-->
+
+                        <div class="page-sidebar-banner">
+                            <a href="shop-left-sidebar.html">
+                                <img src="{{asset('shop/assets/img/banners/banner-sidebar.jpg')}}" class="img-fluid" alt="">
+                            </a>
+                        </div>
+
+                        <!--=======  End of page sidebar banner  =======-->
 
                     </div>
 
@@ -219,7 +218,20 @@
                     <!--=======  End of shop page content  =======-->
 
                     <!--=======  pagination  =======-->
-                    {{$products->links('vendor.pagination.default')}}
+
+                    <div class="pagination-section mb-md-30 mb-sm-30">
+                        <ul class="pagination">
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">></a></li>
+                            <li><a href="#">>|</a></li>
+                        </ul>
+
+                        <div class="pagination-text">
+                            Showing 1 to 9 of 15 (2 Pages)
+                        </div>
+                    </div>
+
                     <!--=======  End of pagination  =======-->
                 </div>
             </div>

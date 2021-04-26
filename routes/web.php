@@ -22,7 +22,10 @@ Route::post('autentificacion/register',[\App\Http\Controllers\Shop\Auth\AuthCont
 Route::post('autentificacion/login',[\App\Http\Controllers\Shop\Auth\AuthController::class,'login']);
 Route::get('autentificacion/_logout',[\App\Http\Controllers\Shop\Auth\AuthController::class,'logout'])->middleware('auth');
 
-Route::resource('productos',\App\Http\Controllers\Shop\Products\ProductsController::class)->only(['index','show']);
+Route::get('productos',[\App\Http\Controllers\Shop\Products\ProductsController::class,'index'])->name('products.index');
+Route::get('productos/{product_slug}',[\App\Http\Controllers\Shop\Products\ProductsController::class,'show'])->name('products.show');
+Route::get('productos/categoria/{category}',[\App\Http\Controllers\Shop\Products\ProductsController::class,'index_to_category'])->name('producs.category');
+Route::get('productos/categoria/{category}/{sub_category}',[\App\Http\Controllers\Shop\Products\ProductsController::class,'index_to_sub_categories'])->name('producs.category');
 
 Route::resource('productos/{product_slug}/reviews',\App\Http\Controllers\Shop\Reviews\ReviewsController::class)->only(['store','update','destroy']);
 

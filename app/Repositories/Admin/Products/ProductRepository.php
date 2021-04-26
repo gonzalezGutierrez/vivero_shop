@@ -44,13 +44,34 @@ class ProductRepository implements \App\Interfaces\RepositoryModelInterface
     }
 
     //SHOP
-    public function productsSHOP($category)
+    public function get_products()
     {
         return $this->model->where('is_active_to_shop',1)
-            ->when($category != null,function ($query) use($category){
-                return $query->where('category_id',$category);
-            })
-            ->with('category')
+            ->orderBy('id','DESC')
+            ->select(ProductHelper::$FIELDS_SHOP_LIST)
+            ->paginate(15);
+    }
+
+    public function get_products_factory($sub_categories,$category_id)
+    {
+        return ($sub_categories->count() > 0 ) 
+            ? $this->get_products_with_sub_categories($sub_categories) 
+            : $this->get_products_with_category($category_id);
+    }
+
+    public function get_products_with_sub_categories($sub_categories)
+    {  
+        $sub_categories_arrays_id = $sub_categories;
+        return $this->model->whereIn('category_id',$sub_categories_arrays_id->toArray())
+            ->where('is_active_to_shop',1)
+            ->select(ProductHelper::$FIELDS_SHOP_LIST)
+            ->paginate(15);
+    }
+
+    public function get_products_with_category($category)
+    {
+        return $this->model->where('is_active_to_shop',1)
+            ->where('category_id',$category)
             ->orderBy('id','DESC')
             ->select(ProductHelper::$FIELDS_SHOP_LIST)
             ->paginate(15);

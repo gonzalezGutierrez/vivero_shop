@@ -43,19 +43,41 @@ class CategoryRepository implements RepositoryModelInterface
 
     public function all(array $configurations)
     {
-        return $this->model->with('sub_categories')->where('parent_id',null)
+        return $this->model->with([
+            'sub_categories' => function($query){
+                return $query->select(['id','slug','name','parent_id','is_active']);
+            }
+        ])->where('parent_id',null)
+        ->when( ! empty($configurations['is_active']) , function ($query) use($configurations) {
+            return $query->where('is_active',1);
+        })
         ->get(['id','slug','name','parent_id','is_active']);
     }
 
-    public function sub_categories()
+    public function sub_categories($columns = ['id','slug','name','parent_id','is_active'])
     {
         return $this->model->where('parent_id','<>',null)          
-            ->get(['id','slug','name','parent_id','is_active']);
+            ->get($columns);
+    }
+
+    public function get_sub_categories_by_category_id($category_id ,$columns = ['id','slug','name','parent_id','is_active'])
+    {
+        return $this->model->where('parent_id',$category_id)
+            ->get($columns);
     }
 
     public function allPluck()
     {
         return $this->model->where('is_active',1)
+            ->select('is_active','name')
+            ->pluck('name','id');
+    }
+
+    public function all_sub_categories_pluck()
+    {
+        return $this->model->where('is_active',1)
+            ->where('parent_id','<>',null)
+            ->select('id','name')
             ->pluck('name','id');
     }
 
@@ -79,14 +101,5 @@ class CategoryRepository implements RepositoryModelInterface
     {
         $record = $this->find($slug);
         return $record->fill(['is_active'=>0])->save();
-    }
-
-    public function categoriesSHOP()
-    {
-        return $this->model->where('is_active',1)
-            ->with('products')
-            ->orderBy('id','DESC')
-            ->select(['id','name','slug','created_at'])
-            ->get();
     }
 }

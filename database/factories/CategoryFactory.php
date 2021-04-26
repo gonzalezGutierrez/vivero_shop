@@ -22,7 +22,9 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name'=>$this->faker->name,
+            'slug'=>$this->faker->slug,
+            'is_active'=> 1
         ];
     }
 }

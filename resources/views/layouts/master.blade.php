@@ -263,6 +263,75 @@
                             <ul>
                                 <li class="active"><a href="{{asset('/')}}">INICIO</a></li>
                                 <li><a href="{{asset('productos')}}">TIENDA</a></li>
+                                <li class="menu-item-has-children"><a href="#">CATEGORÍAS</a>
+                                    <ul class="sub-menu">
+                                        @foreach($categories_list as $category)
+                                            <li class=" {{$category->hasSubCategories() ? 'menu-item-has-children' : '' }}"><a href="{{asset('productos/categoria/'.$category->slug)}}">{{$category->name}}</a>
+                                                @if($category->hasSubCategories()) 
+                                                    <ul class="sub-menu">
+                                                        @foreach($category->sub_categories as $subcategory)
+                                                            <li class="">
+                                                                <a class="{{$subcategory->hasSubCategories() ? 'sub_category_item' : ''}}" href="{{asset('productos/categoria/'.$category->slug.'/'.$subcategory->slug)}}">{{$subcategory->name}}</a>
+                                                                @if ($subcategory->hasSubCategories())
+                                                                    <ul class="">
+                                                                        @foreach($subcategory->sub_categories as $sub__category)
+                                                                            <li><a href="shop-3-column.html">{{$sub__category->name}}</a></li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                @endif
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children"><a href="shop-left-sidebar.html">SHOP</a>
+                                    <ul class="mega-menu four-column">
+                                        <li><a href="#">Shop Grid</a>
+                                            <ul>
+                                                <li><a href="shop-3-column.html">shop 3 column</a></li>
+                                                <li><a href="shop-4-column.html">shop 4 column</a></li>
+                                                <li><a href="shop-left-sidebar.html">shop left sidebar</a></li>
+                                                <li><a href="shop-right-sidebar.html">shop right sidebar</a></li>
+                                                
+                                            </ul>
+                                        </li>
+                                        <li><a href="shop-list-left-sidebar.html">Shop List</a>
+                                            <ul>
+                                                <li><a href="shop-list.html">shop List</a></li>
+                                                <li><a href="shop-list-left-sidebar.html">shop List Left Sidebar</a></li>
+                                                <li><a href="shop-list-right-sidebar.html">shop List Right Sidebar</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="single-product.html">Single Product</a>
+                                            <ul>
+                                                <li><a href="single-product.html">Single Product</a></li>
+                                                <li><a href="single-product-variable.html">Single Product variable</a></li>
+                                                <li><a href="single-product-affiliate.html">Single Product affiliate</a></li>
+                                                <li><a href="single-product-group.html">Single Product group</a></li>
+                                                <li><a href="single-product-tabstyle-2.html">Tab Style 2</a></li>
+                                                <li><a href="single-product-tabstyle-3.html">Tab Style 3</a></li>
+                                                
+                                            </ul>
+                                        </li>
+                                        <li><a href="single-product.html">Single Product</a>
+                                            <ul>
+                                                <li><a href="single-product-gallery-left.html">Gallery Left</a></li>
+                                                <li><a href="single-product-gallery-right.html">Gallery Right</a></li>
+                                                <li><a href="single-product-sticky-left.html">Sticky Left</a></li>
+                                                <li><a href="single-product-sticky-right.html">Sticky Right</a></li>
+                                                <li><a href="single-product-slider-box.html">Slider Box</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="megamenu-banner d-none d-lg-block mt-30 w-100">
+                                            <a href="shop-left-sidebar.html" class="mb-0">
+                                                <img src="assets/img/banners/img-bottom-menu.jpg" class="img-fluid" alt="">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <li><a href="{{asset('categorias')}}">CATEGORÍAS</a></li>
                                 <li><a href="{{asset('nosotros')}}">ACERCA DE</a></li>
                                 <li><a href="{{asset('contacto')}}">CONTACTO</a></li>

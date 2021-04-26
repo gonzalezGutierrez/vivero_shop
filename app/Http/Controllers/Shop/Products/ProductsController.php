@@ -32,23 +32,69 @@ class ProductsController extends Controller
         $this->reviewRepository   = new ReviewRepository();
     }
 
-    public function index(Request $request)
+    public function index()
     {
 
-        $category = $request->category;
-
-        $products = $this->repository->productsSHOP($category);
+        $products      = $this->repository->get_products();
 
         $productsTotal = $products->toArray()['total'];
 
-        $categories = $this->categoryRepository->categoriesSHOP();
+        $sidebar       = 'sidebar_categories';
 
         return view('Shop.Pages.Products.index',[
-            'products'=>$products,
-            'productsTotal'=>$productsTotal,
-            'categories'=>$categories,
-            'category_id' => $category
+            'products'      =>$products,
+            'productsTotal' =>$productsTotal,
+            'sidebar'       => $sidebar
         ]);
+
+    }
+
+    public function index_to_category($category_slug)
+    {
+
+        $category      = $this->categoryRepository->find($category_slug);
+
+        $subcategories = $this->categoryRepository->get_sub_categories_by_category_id($category->id); 
+
+        $products      = $this->repository->get_products_factory($subcategories,$category->id);
+
+        $productsTotal = $products->toArray()['total'];
+
+        $sidebar       = 'sidebar_category_selected';
+
+        return view('Shop.Pages.Products.index',[
+            'products'      =>$products,
+            'subcategories' =>$subcategories,
+            'productsTotal' =>$productsTotal,
+            'category'      =>$category,
+            'sidebar'       =>$sidebar
+        ]);
+    }
+
+    public function index_to_sub_categories($category_slug,$sub_category_slug)
+    {
+
+        $category      = $this->categoryRepository->find($category_slug);
+        
+        $subcategory   = $this->categoryRepository->find($sub_category_slug);
+
+        $products      = $this->repository->get_products_with_category($subcategory->id);
+
+        $productsTotal = $products->toArray()['total'];
+
+        $subcategories = $this->categoryRepository->get_sub_categories_by_category_id($category->id);
+
+        $sidebar       = "sidebar_sub_category_selected";
+        
+        return view('Shop.Pages.Products.index',[
+            'products'      =>$products,
+            'productsTotal' =>$productsTotal,
+            'category'      => $category,
+            'subcategories' =>$subcategories,
+            'subcategory'   =>$subcategory,
+            'sidebar'       =>$sidebar
+        ]);
+
     }
 
     public function show($slug)

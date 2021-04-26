@@ -35,6 +35,11 @@ class Category extends Model
         return $this->belongsToMany(Category::class,'parent_id');
     }
 
+    public function hasSubCategories()
+    {
+        return $this->sub_categories->count() > 0;
+    }
+
     public function findBySlug($slug)
     {
         return $this->where('slug',$slug)->firstOrFail();
